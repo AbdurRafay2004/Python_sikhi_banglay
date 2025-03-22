@@ -11,9 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // document.body.appendChild(fadeTransition);
 
     // Add loaded class to body after page loads
-    setTimeout(() => {
-      document.body.classList.add('loaded');
-    }, 100);
+    // setTimeout(() => {
+    //   document.body.classList.add('loaded');
+    // }, 100);
+    
+    // Instead of using a transition, make the body visible immediately
+    document.body.style.opacity = '1';
 
     const menuToggle = document.getElementById('menu-toggle');
     const sidebar = document.getElementById('sidebar');
@@ -482,8 +485,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Run after the page loads and after Prism.js highlights code
     document.addEventListener('DOMContentLoaded', function() {
-      // Let Prism.js finish first (using a small timeout)
-      setTimeout(enhanceComparisonOperators, 100);
+      // Call directly without timeout for immediate execution  
+      enhanceComparisonOperators();
     });
 
     // Add copy code functionality

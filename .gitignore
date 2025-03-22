@@ -10,7 +10,10 @@
 *.sln
 *.sw?
 README-LESSONS.md
-how --name-status
+
+# Git
+.gitignore
+
 # Logs
 logs
 *.log

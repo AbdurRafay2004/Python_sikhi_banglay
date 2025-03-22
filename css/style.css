@@ -1028,8 +1028,8 @@ pre > code {
   border-radius: 2px;
 }
 
-/* Page Transition Animation */
-.page-transition {
+/* Modern Fade Transition */
+.fade-transition {
   position: fixed;
   top: 0;
   left: 0;
@@ -1037,30 +1037,12 @@ pre > code {
   height: 100%;
   background-color: var(--bg-color);
   z-index: 1000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 
-.page-transition.active {
-  opacity: 1;
+.fade-transition.active {
+  opacity: 0.6;
   pointer-events: all;
-}
-
-.page-transition .spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-radius: 50%;
-  border-top-color: var(--button-bg);
-  animation: spin 0.8s ease-in-out infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
 }

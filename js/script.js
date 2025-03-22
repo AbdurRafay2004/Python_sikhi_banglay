@@ -1,9 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Create page transition element
-    const pageTransition = document.createElement('div');
-    pageTransition.className = 'page-transition';
-    pageTransition.innerHTML = '<div class="spinner"></div>';
-    document.body.appendChild(pageTransition);
+    // Remove the page transition element with spinner
+    // const pageTransition = document.createElement('div');
+    // pageTransition.className = 'page-transition';
+    // pageTransition.innerHTML = '<div class="spinner"></div>';
+    // document.body.appendChild(pageTransition);
+
+    // Add fade transition element
+    const fadeTransition = document.createElement('div');
+    fadeTransition.className = 'fade-transition';
+    document.body.appendChild(fadeTransition);
 
     // Add loaded class to body after page loads
     setTimeout(() => {
@@ -484,7 +489,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add copy code functionality
     addCopyCodeButtons();
 
-    // Add page transition when clicking on links
+    // Implement smoother page transitions
     document.addEventListener('click', (e) => {
       // Check if the clicked element is a link to another page (not external, not anchor)
       const link = e.target.closest('a');
@@ -497,13 +502,38 @@ document.addEventListener('DOMContentLoaded', () => {
         
         e.preventDefault();
         
-        // Show transition
-        pageTransition.classList.add('active');
+        // Apply fade out transition
+        fadeTransition.classList.add('active');
         
-        // Navigate to new page after animation
+        // Navigate to new page after a short fade animation
         setTimeout(() => {
           window.location.href = link.href;
-        }, 400); // Slightly longer than the CSS transition to ensure smooth animation
+        }, 200); // Shorter transition time for better UX
+      }
+    });
+
+    // Preload pages on hover for faster navigation
+    const preloadLinks = document.querySelectorAll('a');
+    preloadLinks.forEach(link => {
+      // Only preload internal links
+      if (link.hostname === window.location.hostname && 
+          !link.href.includes('#') && 
+          !link.hasAttribute('download')) {
+        
+        link.addEventListener('mouseenter', () => {
+          const linkUrl = link.href;
+          
+          // Check if we've already preloaded this URL
+          if (!link.dataset.preloaded) {
+            const preloadLink = document.createElement('link');
+            preloadLink.rel = 'prefetch';
+            preloadLink.href = linkUrl;
+            document.head.appendChild(preloadLink);
+            
+            // Mark as preloaded to avoid duplicate preloads
+            link.dataset.preloaded = 'true';
+          }
+        });
       }
     });
 });

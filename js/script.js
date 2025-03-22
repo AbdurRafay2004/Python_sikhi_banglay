@@ -451,6 +451,10 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // Add the comparison-operator class to operators that are comparisons
       operatorTokens.forEach(token => {
+        // Remove the comparison styling from all tokens first
+        token.classList.remove('comparison-operator');
+        
+        // Only add it back for actual comparison operators
         if (comparisonOperators.includes(token.textContent)) {
           token.classList.add('comparison-operator');
         }

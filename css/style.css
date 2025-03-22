@@ -56,7 +56,7 @@
 [data-theme='dark'] code[class*="language-"],
 [data-theme='dark'] pre[class*="language-"] {
   color: #e2e8f0;
-  /* text-shadow: none; */
+  text-shadow: none;
 }
 
 [data-theme='dark'] .token.comment,
@@ -100,6 +100,7 @@
   color: #81e6d9;
   font-weight: bold;
   background: transparent;
+  text-shadow: none;
 }
 
 [data-theme='dark'] .token.atrule,
@@ -128,7 +129,7 @@
   color: #0056b3;
   font-weight: bold;
   background: transparent;
-  /* text-shadow: none; */
+  text-shadow: none;
 }
 
 /* Make comparison operators more visible in light theme */
@@ -138,12 +139,24 @@
   background: rgba(232, 62, 140, 0.1);
   padding: 0 2px;
   border-radius: 2px;
+  text-shadow: none;
+}
+
+/* Fix for code 3D/doubled appearance */
+code[class*="language-"],
+pre[class*="language-"],
+.token {
+  text-shadow: none !important;
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Remove the data-value selectors since they don't work with Prism.js */
 .token.operator.comparison-operator {
   color: #d53f8c;
   font-weight: bold;
+  text-shadow: none;
 }
 
 /* Reset and Base Styles */

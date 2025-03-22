@@ -5,10 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // pageTransition.innerHTML = '<div class="spinner"></div>';
     // document.body.appendChild(pageTransition);
 
-    // Add fade transition element
-    const fadeTransition = document.createElement('div');
-    fadeTransition.className = 'fade-transition';
-    document.body.appendChild(fadeTransition);
+    // Remove fade transition element
+    // const fadeTransition = document.createElement('div');
+    // fadeTransition.className = 'fade-transition';
+    // document.body.appendChild(fadeTransition);
 
     // Add loaded class to body after page loads
     setTimeout(() => {
@@ -489,28 +489,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add copy code functionality
     addCopyCodeButtons();
 
-    // Implement smoother page transitions
-    document.addEventListener('click', (e) => {
-      // Check if the clicked element is a link to another page (not external, not anchor)
-      const link = e.target.closest('a');
-      if (link && 
-          link.href && 
-          link.hostname === window.location.hostname && 
-          !link.hasAttribute('target') && 
-          !link.hasAttribute('download') &&
-          !link.href.includes('#')) {
-        
-        e.preventDefault();
-        
-        // Apply fade out transition
-        fadeTransition.classList.add('active');
-        
-        // Navigate to new page after a short fade animation
-        setTimeout(() => {
-          window.location.href = link.href;
-        }, 200); // Shorter transition time for better UX
-      }
-    });
+    // Remove page transition code and use normal link behavior
+    // We removed the transition code here - links now work naturally without delays
 
     // Preload pages on hover for faster navigation
     const preloadLinks = document.querySelectorAll('a');

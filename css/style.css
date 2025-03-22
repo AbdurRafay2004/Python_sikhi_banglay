@@ -1027,22 +1027,3 @@ pre > code {
   padding: 0 2px;
   border-radius: 2px;
 }
-
-/* Modern Fade Transition */
-.fade-transition {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--bg-color);
-  z-index: 1000;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-}
-
-.fade-transition.active {
-  opacity: 0.6;
-  pointer-events: all;
-}

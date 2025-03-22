@@ -1,4 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Create page transition element
+    const pageTransition = document.createElement('div');
+    pageTransition.className = 'page-transition';
+    pageTransition.innerHTML = '<div class="spinner"></div>';
+    document.body.appendChild(pageTransition);
+
+    // Add loaded class to body after page loads
+    setTimeout(() => {
+      document.body.classList.add('loaded');
+    }, 100);
+
     const menuToggle = document.getElementById('menu-toggle');
     const sidebar = document.getElementById('sidebar');
     const themeToggle = document.getElementById('theme-toggle');
@@ -11,32 +22,45 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.className = 'overlay';
     body.appendChild(overlay);
   
+    // Function to close sidebar
+    function closeSidebar() {
+      // Start the closing animation by removing the active class from sidebar
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+      
+      // Remove other classes after animation completes
+      setTimeout(() => {
+        document.body.classList.remove('sidebar-open');
+        menuToggle.classList.remove('active');
+      }, 350); // Match this with the CSS transition timing
+    }
+  
     // Toggle sidebar, hamburger icon, and overlay on click
     menuToggle.addEventListener('click', function() {
-      const menuToggle = this;
-      const sidebar = document.getElementById('sidebar');
-      
       // Toggle classes for menu button, sidebar and body
-      menuToggle.classList.toggle('active');
+      this.classList.toggle('active');
       sidebar.classList.toggle('active');
       body.classList.toggle('sidebar-open');
       
       // Toggle overlay
-      const overlay = document.querySelector('.overlay');
-      if (overlay) {
-        overlay.classList.toggle('active');
-      }
+      overlay.classList.toggle('active');
     });
   
     // Close sidebar when overlay is clicked
-    overlay.addEventListener('click', function() {
-      const menuToggle = document.getElementById('menu-toggle');
-      const sidebar = document.getElementById('sidebar');
-      
-      document.body.classList.remove('sidebar-open');
-      if (menuToggle) menuToggle.classList.remove('active');
-      if (sidebar) sidebar.classList.remove('active');
-      this.classList.remove('active');
+    overlay.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closeSidebar();
+    });
+    
+    // Add click event to document body to close sidebar when clicking outside
+    document.addEventListener('click', function(e) {
+      // If sidebar is open and click is outside sidebar
+      if (body.classList.contains('sidebar-open') && 
+          !sidebar.contains(e.target) && 
+          e.target !== menuToggle && 
+          !menuToggle.contains(e.target)) {
+        closeSidebar();
+      }
     });
   
     // Theme toggle functionality
@@ -352,16 +376,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize progress tracker
     progressTracker.init();
 
-    // Close sidebar when clicking outside on mobile
-    document.addEventListener('click', function(event) {
-      // Check if sidebar is open and if click is outside the sidebar
-      if (document.body.classList.contains('sidebar-open') && 
-          !event.target.closest('#sidebar') && 
-          !event.target.closest('#menu-toggle')) {
-        document.body.classList.remove('sidebar-open');
-      }
-    });
-
     function updateThemeIcon(theme) {
       themeToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
     }
@@ -469,6 +483,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add copy code functionality
     addCopyCodeButtons();
+
+    // Add page transition when clicking on links
+    document.addEventListener('click', (e) => {
+      // Check if the clicked element is a link to another page (not external, not anchor)
+      const link = e.target.closest('a');
+      if (link && 
+          link.href && 
+          link.hostname === window.location.hostname && 
+          !link.hasAttribute('target') && 
+          !link.hasAttribute('download') &&
+          !link.href.includes('#')) {
+        
+        e.preventDefault();
+        
+        // Show transition
+        pageTransition.classList.add('active');
+        
+        // Navigate to new page after animation
+        setTimeout(() => {
+          window.location.href = link.href;
+        }, 400); // Slightly longer than the CSS transition to ensure smooth animation
+      }
+    });
 });
 
 // Function to add copy buttons to code blocks

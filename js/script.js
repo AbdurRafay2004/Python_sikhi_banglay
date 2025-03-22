@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Progress tracking system
     const progressTracker = {
       // Array of lesson ids
-      lessonIds: ['lesson1', 'lesson2', 'lesson3'],
+      lessonIds: ['lesson1', 'lesson2', 'lesson3', 'lesson4', 'lesson5'],
       
       // Get progress from localStorage
       getProgress: function() {
@@ -428,4 +428,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
     }
+
+    // Function to add custom classes to comparison operators after Prism.js highlights code
+    function enhanceComparisonOperators() {
+      // List of comparison operators in Python
+      const comparisonOperators = ["==", "!=", ">", "<", ">=", "<="];
+      
+      // Find all operator tokens
+      const operatorTokens = document.querySelectorAll('.token.operator');
+      
+      // Add the comparison-operator class to operators that are comparisons
+      operatorTokens.forEach(token => {
+        if (comparisonOperators.includes(token.textContent)) {
+          token.classList.add('comparison-operator');
+        }
+      });
+    }
+
+    // Run after the page loads and after Prism.js highlights code
+    document.addEventListener('DOMContentLoaded', function() {
+      // Let Prism.js finish first (using a small timeout)
+      setTimeout(enhanceComparisonOperators, 100);
+    });
   });

@@ -9,7 +9,8 @@
 *.njsproj
 *.sln
 *.sw?
-
+README-LESSONS.md
+how --name-status
 # Logs
 logs
 *.log

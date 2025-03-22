@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="পাইথন প্রোগ্রামিং ভাষা: ফাংশন এবং মডিউল - পাঠ ৪।">
+  <meta name="keywords" content="Python, বাংলা, ফাংশন, মডিউল, প্রোগ্রামিং, শিখি">
+  <meta name="author" content="Python শিখি বাংলায়">
+  <title>পাঠ ৪: ফাংশন এবং মডিউল - Python শিখি বাংলায়</title>
+  <script>
+    // Apply the saved theme immediately to prevent flash
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- Prism.js CSS for syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--button-bg);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+      z-index: 1000;
+      box-shadow: 0 2px 5px var(--shadow-color);
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .back-to-top:hover {
+      background-color: var(--button-hover);
+    }
+    
+    @media (max-width: 767px) {
+      .back-to-top {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+        bottom: 15px;
+        right: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Python শিখি বাংলায়</h1>
+    <div class="header-buttons">
+      <button id="menu-toggle" aria-label="Toggle navigation menu">
+        <span class="icon"></span>
+      </button>
+      <button id="theme-toggle" aria-label="Toggle dark/light mode">
+        ☀️
+      </button>
+    </div>
+  </header>
+  
+  <div class="overlay"></div>
+  
+  <nav id="sidebar">
+    <ul>
+      <li><a href="../index.html">হোম</a></li>
+      <li><a href="lesson1.html">পাঠ ১</a></li>
+      <li><a href="lesson2.html">পাঠ ২</a></li>
+      <li><a href="lesson3.html">পাঠ ৩</a></li>
+      <li><a href="lesson4.html">পাঠ ৪</a></li>
+      <li><a href="lesson5.html">পাঠ ৫</a></li>
+      <!-- অতিরিক্ত নতুন পাঠ এখানে যোগ করুন -->
+      <!-- <li><a href="lesson5.html">পাঠ ৫</a></li> -->
+    </ul>
+  </nav>
+  <main id="content">
+    <section class="lesson-header">
+      <h2>পাঠ ৪: ফাংশন এবং মডিউল</h2>
+    </section>
+    
+    <section class="lesson-content">
+      <!-- প্রথম বিষয়বস্তু ব্লক -->
+      <div class="content-block">
+        <h3>ফাংশন কি?</h3>
+        <p>ফাংশন হল পুনরায় ব্যবহারযোগ্য কোড ব্লক যা একটি নির্দিষ্ট কাজ সম্পাদন করে। Python-এ আমরা <code>def</code> কীওয়ার্ড ব্যবহার করে ফাংশন সংজ্ঞায়িত করি।</p>
+        <pre><code class="language-python"># একটি সাধারণ ফাংশন
+def সালাম(নাম):
+    return f"সালাম, {নাম}!"
+
+# ফাংশন কল
+বার্তা = সালাম("আমিন")
+print(বার্তা)  # আউটপুট: সালাম, আমিন!</code></pre>
+      </div>
+      
+      <!-- দ্বিতীয় বিষয়বস্তু ব্লক -->
+      <div class="content-block">
+        <h3>ফাংশন প্যারামিটার</h3>
+        <p>ফাংশনে বিভিন্ন ধরনের প্যারামিটার ব্যবহার করা যায়:</p>
+        <ul>
+          <li>সাধারণ প্যারামিটার</li>
+          <li>ডিফল্ট প্যারামিটার</li>
+          <li>কীওয়ার্ড আর্গুমেন্ট</li>
+          <li>আনপ্যাকিং আর্গুমেন্ট (*args, **kwargs)</li>
+        </ul>
+        <pre><code class="language-python"># ডিফল্ট প্যারামিটার সহ ফাংশন
+def জোগ_করো(ক=0, খ=0):
+    return ক + খ
+
+print(জোগ_করো(5, 3))  # আউটপুট: 8
+print(জোগ_করো(5))     # আউটপুট: 5
+print(জোগ_করো())       # আউটপুট: 0</code></pre>
+      </div>
+      
+      <!-- তৃতীয় বিষয়বস্তু ব্লক -->
+      <div class="content-block">
+        <h3>মডিউল কি?</h3>
+        <p>মডিউল হল Python ফাইল যাতে ফাংশন, ক্লাস এবং ভেরিয়েবল থাকে যা অন্য প্রোগ্রামে ব্যবহার করা যায়। Python-এর একটি অসাধারণ বৈশিষ্ট্য হল এর বিশাল মডিউল লাইব্রেরি।</p>
+        <pre><code class="language-python"># বিল্ট-ইন মডিউল ব্যবহার
+import math
+
+# pi এর মান ব্যবহার
+বৃত্ত_ক্ষেত্রফল = math.pi * (5 ** 2)
+print(f"বৃত্তের ক্ষেত্রফল: {বৃত্ত_ক্ষেত্রফল:.2f}")
+
+# গণিত ফাংশন ব্যবহার
+x = 16
+বর্গমূল = math.sqrt(x)
+print(f"{x} এর বর্গমূল: {বর্গমূল}")</code></pre>
+      </div>
+      
+      <!-- চতুর্থ বিষয়বস্তু ব্লক (অনুশীলন সমস্যা) -->
+      <div class="content-block">
+        <h3>অনুশীলন সমস্যা</h3>
+        <p>নিচের সমস্যাগুলি সমাধান করার চেষ্টা করুন:</p>
+        <ol>
+          <li>একটি ফাংশন লিখুন যা একটি সংখ্যার ফ্যাক্টরিয়াল গণনা করে।</li>
+          <li>একটি ফাংশন লিখুন যা একটি তালিকা (list) নেয় এবং তার সবচেয়ে বড় এবং সবচেয়ে ছোট উপাদান ফেরত দেয়।</li>
+          <li><code>random</code> মডিউল ব্যবহার করে 1 থেকে 100 এর মধ্যে একটি এলোমেলো সংখ্যা উৎপন্ন করুন।</li>
+        </ol>
+        <pre><code class="language-python"># সমাধান একটি উদাহরণ:
+def ফ্যাক্টরিয়াল(n):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return n * ফ্যাক্টরিয়াল(n-1)
+
+print(ফ্যাক্টরিয়াল(5))  # আউটপুট: 120</code></pre>
+      </div>
+    </section>
+    
+    <section class="lesson-navigation">
+      <a href="lesson3.html" class="button">পূর্ববর্তী: পাঠ ৩</a>
+      <a href="lesson5.html" class="button">পরবর্তী: পাঠ ৫</a>
+    </section>
+  </main>
+  
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+    <span>↑</span>
+  </button>
+  
+  <div id="network-status" class="network-status">
+    <span class="status-icon">🔄</span>
+    <span class="status-text">সংযোগ চেক করা হচ্ছে...</span>
+  </div>
+  
+  <footer>
+    <p>© 2025 Python শিখি বাংলায়</p>
+  </footer>
+  <script src="../js/script.js"></script>
+  <!-- Prism.js for syntax highlighting -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-SkmBfuA2hqjzEVpmnMt/LINrjop3GKWqsuLSSB3e7iBmYK7JuWw4ldmmxwD9mdm2IRTTi0OxSAfEGvgEi0i2Kw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html> 

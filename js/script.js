@@ -124,6 +124,18 @@ document.addEventListener('DOMContentLoaded', () => {
           description: 'if-else স্টেটমেন্ট, লুপ এবং ফাংশন',
           url: 'lesson3.html',
           keywords: ['if-else', 'লুপ', 'ফাংশন', 'কন্ডিশন', 'while', 'for']
+        },
+        {
+          title: 'পাঠ ৪: লিস্ট এবং টাপল',
+          description: 'লিস্ট এবং টাপলের ব্যবহার, স্ট্রাকচারিং এবং অপারেটরস',
+          url: 'lesson4.html',
+          keywords: ['লিস্ট', 'টাপল', 'স্ট্রাকচারিং', 'অপারেটর']
+        },
+        {
+          title: 'পাঠ ৫: ডিকশনারি এবং ক্লাস',
+          description: 'ডিকশনারি এবং ক্লাসের ব্যবহার, অবজেক্ট-অরিয়েন্টেড প্রোগ্রামিং',
+          url: 'lesson5.html',
+          keywords: ['ডিকশনারি', 'ক্লাস', 'অবজেক্ট', 'অরিয়েন্টেড']
         }
       ];
       
@@ -151,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Display results
         if (matchedLessons.length > 0) {
           searchResults.innerHTML = matchedLessons.map(lesson => `
-            <a href="${lesson.url}" class="result-item">
+            <a href="pages/${lesson.url}" class="result-item">
               <h4 class="result-title">${highlightMatch(lesson.title, query)}</h4>
               <p class="result-description">${lesson.description}</p>
             </a>

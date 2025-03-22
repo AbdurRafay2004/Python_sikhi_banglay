@@ -466,4 +466,100 @@ document.addEventListener('DOMContentLoaded', () => {
       // Let Prism.js finish first (using a small timeout)
       setTimeout(enhanceComparisonOperators, 100);
     });
+
+    // Add copy code functionality
+    addCopyCodeButtons();
+});
+
+// Function to add copy buttons to code blocks
+function addCopyCodeButtons() {
+  // Find all code blocks
+  const codeBlocks = document.querySelectorAll('pre > code');
+  
+  if (codeBlocks.length === 0) return;
+  
+  codeBlocks.forEach((codeBlock) => {
+    const pre = codeBlock.parentNode;
+    
+    // Create container div
+    const container = document.createElement('div');
+    container.className = 'code-container';
+    
+    // Insert container before pre
+    pre.parentNode.insertBefore(container, pre);
+    
+    // Move pre into container
+    container.appendChild(pre);
+    
+    // Create copy button
+    const button = document.createElement('button');
+    button.className = 'copy-button';
+    button.innerHTML = '<span>📋</span> কপি';
+    button.setAttribute('aria-label', 'Copy code to clipboard');
+    
+    // Add button to the container (not to pre)
+    container.appendChild(button);
+    
+    // Add click event listener to the button
+    button.addEventListener('click', async () => {
+      try {
+        // Get the text content of the code block
+        const code = codeBlock.textContent;
+        
+        // Try using the modern Clipboard API first
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(code);
+        } else {
+          // Fallback for browsers that don't support the Clipboard API
+          fallbackCopyToClipboard(code);
+        }
+        
+        // Update button text to indicate success
+        button.innerHTML = '<span>✓</span> কপি হয়েছে!';
+        button.classList.add('copied');
+        
+        // Reset button text after 2 seconds
+        setTimeout(() => {
+          button.innerHTML = '<span>📋</span> কপি';
+          button.classList.remove('copied');
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy: ', err);
+        
+        // Update button text to indicate failure
+        button.innerHTML = '<span>❌</span> ব্যর্থ';
+        
+        // Reset button text after 2 seconds
+        setTimeout(() => {
+          button.innerHTML = '<span>📋</span> কপি';
+        }, 2000);
+      }
+    });
   });
+}
+
+// Fallback method for copying text to clipboard
+function fallbackCopyToClipboard(text) {
+  // Create a temporary textarea element
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  
+  // Make the textarea out of the viewport
+  textarea.style.position = 'fixed';
+  textarea.style.left = '-999999px';
+  textarea.style.top = '-999999px';
+  
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
+  
+  // Execute the copy command
+  const successful = document.execCommand('copy');
+  
+  // Remove the temporary element
+  document.body.removeChild(textarea);
+  
+  if (!successful) {
+    throw new Error('Failed to copy using fallback method');
+  }
+}

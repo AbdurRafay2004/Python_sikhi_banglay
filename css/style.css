@@ -171,11 +171,30 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Header and Nav */
+header {
+  background-color: var(--header-bg);
+  color: white;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+/* Basic body styles */
 body {
+  padding-top: 4rem; /* For fixed header */
+  margin: 0;
   font-family: 'Noto Sans Bengali', sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
   line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-color);
   transition: background-color 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
   display: flex;
@@ -183,69 +202,24 @@ body {
   min-height: 100vh;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: var(--title-color);
-  margin-bottom: 1rem;
-  font-weight: 700;
-  line-height: 1.3;
-}
-
-h1 {
-  font-size: 2rem;
-}
-
-h2 {
-  font-size: 1.75rem;
-}
-
-h3 {
-  font-size: 1.5rem;
-}
-
-h4 {
-  font-size: 1.25rem;
-}
-
-p {
-  margin-bottom: 1rem;
-}
-
-a {
-  color: var(--link-color);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-ul, ol {
-  margin-bottom: 1rem;
-  margin-left: 1.5rem;
-}
-
-li {
-  margin-bottom: 0.5rem;
-}
-
-/* Header */
-header {
-  background-color: var(--header-bg);
-  color: white;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  position: relative;
-  box-shadow: 0 2px 4px var(--shadow-color);
-  z-index: 100;
-}
-
+/* Make the site title clickable with hover effect */
 header h1 {
   margin: 0;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Style for the header title link */
+header h1 a {
   color: white;
-  flex: 1;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+}
+
+header h1 a:hover {
+  opacity: 0.9;
+  text-decoration: none;
 }
 
 /* Fixed position for header buttons to avoid overlap */
@@ -361,11 +335,12 @@ header h1 {
 
 #sidebar a {
   display: block;
-  padding: 0.75rem 1.5rem;
+  padding: 0.8rem 1rem;
   color: var(--text-color);
-  border-left: 3px solid transparent;
-  transition: all 0.3s ease;
-  position: relative;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-bottom: 0.3rem;
+  transition: background-color 0.3s ease;
 }
 
 #sidebar a:hover {
@@ -374,13 +349,34 @@ header h1 {
 }
 
 #sidebar a.active {
-  border-left-color: var(--button-bg);
   background-color: var(--bg-tertiary);
+  color: var(--button-bg);
+  text-decoration: none;
+  position: relative;
   font-weight: 600;
 }
 
+#sidebar a.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: var(--button-bg);
+  border-radius: 0 2px 2px 0;
+}
+
 #sidebar a.completed {
-  position: relative;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Override for sidebar links */
+#sidebar a:hover, 
+#sidebar a.active:hover,
+#sidebar a.completed:hover {
+  text-decoration: none;
 }
 
 .completion-indicator {
@@ -423,18 +419,61 @@ footer {
   border-bottom: 1px solid var(--border-color);
 }
 
+/* Code Block Container */
+.code-container {
+  position: relative;
+  margin: 1.5rem 0;
+}
+
 /* Code Blocks */
 pre {
   background-color: var(--code-bg);
   padding: 1rem;
-  border-radius: 5px;
+  padding-top: 2rem; /* Extra space for button */
+  border-radius: 6px;
+  margin: 0;
   overflow-x: auto;
-  margin-bottom: 1.5rem;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 5px var(--shadow-color);
 }
 
-code {
+pre > code {
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
   font-size: 0.9rem;
+  display: block;
+}
+
+/* Code block with copy button */
+.copy-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  background-color: var(--button-bg);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  z-index: 10;
+}
+
+.copy-button:hover {
+  opacity: 1;
+  background-color: var(--button-hover);
+}
+
+.copy-button:active {
+  transform: scale(0.95);
+}
+
+.copy-button.copied {
+  background-color: #28a745;
 }
 
 /* Hero Section */

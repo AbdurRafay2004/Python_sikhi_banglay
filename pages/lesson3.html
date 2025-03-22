@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="পাইথন প্রোগ্রামিং এর কন্ট্রোল স্ট্রাকচার শিখুন - পাঠ ৩।">
+  <meta name="keywords" content="Python, বাংলা, কন্ট্রোল স্ট্রাকচার, if-else, loop, প্রোগ্রামিং">
+  <meta name="author" content="Python শিখি বাংলায়">
+  <title>পাঠ ৩: কন্ট্রোল স্ট্রাকচার - Python শিখি বাংলায়</title>
+  <script>
+    // Apply the saved theme immediately to prevent flash
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- Prism.js CSS for syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--button-bg);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+      z-index: 1000;
+      box-shadow: 0 2px 5px var(--shadow-color);
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .back-to-top:hover {
+      background-color: var(--button-hover);
+    }
+    
+    @media (max-width: 767px) {
+      .back-to-top {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+        bottom: 15px;
+        right: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Python শিখি বাংলায়</h1>
+    <div class="header-buttons">
+      <button id="menu-toggle" aria-label="Toggle navigation menu">
+        <span class="icon"></span>
+      </button>
+      <button id="theme-toggle" aria-label="Toggle dark/light mode">
+        ☀️
+      </button>
+    </div>
+  </header>
+  
+  <div class="overlay"></div>
+  
+  <nav id="sidebar">
+    <ul>
+      <li><a href="../index.html">হোম</a></li>
+      <li><a href="lesson1.html">পাঠ ১</a></li>
+      <li><a href="lesson2.html">পাঠ ২</a></li>
+      <li><a href="lesson3.html">পাঠ ৩</a></li>
+    </ul>
+  </nav>
+  <main id="content">
+    <section class="lesson-header">
+      <h2>পাঠ ৩: কন্ট্রোল স্ট্রাকচার</h2>
+    </section>
+    
+    <section class="lesson-content">
+      <div class="content-block">
+        <h3>কন্ডিশনাল স্টেটমেন্ট (if-else)</h3>
+        <p>কন্ডিশনাল স্টেটমেন্ট আমাদের কোডে সিদ্ধান্ত নিতে সাহায্য করে।</p>
+        <pre><code class="language-python">age = 18
+
+if age >= 18:
+    print("আপনি প্রাপ্তবয়স্ক")
+else:
+    print("আপনি নাবালক")</code></pre>
+      </div>
+      
+      <div class="content-block">
+        <h3>লুপ (for এবং while)</h3>
+        <p>লুপ একই কাজ বারবার করার জন্য ব্যবহৃত হয়।</p>
+        <pre><code class="language-python"># for লুপ
+for i in range(5):
+    print(i)
+    
+# while লুপ
+count = 0
+while count < 5:
+    print(count)
+    count += 1</code></pre>
+      </div>
+    </section>
+    
+    <section class="lesson-navigation">
+      <a href="lesson2.html" class="button">পূর্ববর্তী: পাঠ ২</a>
+      <a href="#" class="button disabled">পরবর্তী: শীঘ্রই আসছে</a>
+    </section>
+  </main>
+  
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+    <span>↑</span>
+  </button>
+  
+  <div id="network-status" class="network-status">
+    <span class="status-icon">🔄</span>
+    <span class="status-text">সংযোগ চেক করা হচ্ছে...</span>
+  </div>
+  
+  <footer>
+    <p>© 2023 Python শিখি বাংলায়</p>
+  </footer>
+  <script src="../js/script.js"></script>
+  <!-- Prism.js for syntax highlighting -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-SkmBfuA2hqjzEVpmnMt/LINrjop3GKWqsuLSSB3e7iBmYK7JuWw4ldmmxwD9mdm2IRTTi0OxSAfEGvgEi0i2Kw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>

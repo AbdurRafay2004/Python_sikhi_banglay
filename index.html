@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="বাংলায় পাইথন প্রোগ্রামিং শেখার সেরা রিসোর্স। সহজ ভাষায় Python শিখুন।">
+  <meta name="keywords" content="Python, বাংলা, প্রোগ্রামিং, শিখি, কোডিং">
+  <meta name="author" content="Python শিখি বাংলায়">
+  <title>Python শিখি বাংলায় - সহজে বাংলায় পাইথন শিখুন</title>
+  <script>
+    // Apply the saved theme immediately to prevent flash
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Prism.js CSS for syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .network-status {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--button-bg);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1100;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .network-status.visible {
+      opacity: 1;
+    }
+    .network-status.offline {
+      background-color: #e53935;
+    }
+    .status-icon {
+      font-size: 1.1rem;
+    }
+    .search-container {
+      margin: 1.5rem 0;
+      position: relative;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .search-box {
+      width: 100%;
+      padding: 8px 40px 8px 15px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      background-color: var(--input-bg);
+      color: var(--text-color);
+      font-family: 'Noto Sans Bengali', sans-serif;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+    .search-box:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--button-bg);
+      border-color: var(--button-bg);
+    }
+    .search-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+    .search-results {
+      margin-top: 0.5rem;
+      display: none;
+      background-color: var(--bg-color);
+      border-radius: 8px;
+      box-shadow: 0 2px 6px var(--shadow-color);
+      z-index: 1050;
+      position: absolute;
+      width: 100%;
+      left: 0;
+      right: 0;
+      max-height: 300px;
+      overflow-y: auto;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      padding: 0.5rem;
+      box-sizing: border-box;
+    }
+    .search-results.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .result-item {
+      padding: 0.6rem 0.75rem;
+      margin-bottom: 0.25rem;
+      background-color: var(--card-bg);
+      border-radius: 6px;
+      box-shadow: 0 1px 2px var(--shadow-color);
+      transition: all 0.2s ease;
+      display: block;
+      text-decoration: none;
+      color: var(--text-color);
+    }
+    .result-item:last-child {
+      margin-bottom: 0;
+    }
+    .result-item:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px var(--shadow-color);
+      background-color: var(--sidebar-bg);
+    }
+    .result-title {
+      margin: 0 0 0.25rem 0;
+      font-size: 1rem;
+      color: var(--button-bg);
+      font-weight: 600;
+    }
+    .result-description {
+      margin: 0;
+      font-size: 0.8rem;
+      color: var(--text-color);
+      opacity: 0.9;
+    }
+    .no-results {
+      text-align: center;
+      padding: 0.75rem;
+      color: var(--text-secondary);
+      background-color: var(--card-bg);
+      border-radius: 6px;
+      margin: 0.25rem;
+      font-size: 0.9rem;
+    }
+    
+    /* Styling for highlighted search matches */
+    .search-highlight {
+      background-color: var(--button-bg);
+      color: white;
+      padding: 0 2px;
+      border-radius: 2px;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+    @media (max-width: 767px) {
+      .search-container {
+        width: 90%;
+        max-width: 90%;
+      }
+      
+      .search-results {
+        width: 100%;
+        max-height: 250px;
+        left: 0;
+        right: 0;
+      }
+      
+      .result-item {
+        padding: 0.6rem;
+      }
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--button-bg);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+      z-index: 1000;
+      box-shadow: 0 2px 5px var(--shadow-color);
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .back-to-top:hover {
+      background-color: var(--button-hover);
+    }
+    
+    @media (max-width: 767px) {
+      .back-to-top {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+        bottom: 15px;
+        right: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Python শিখি বাংলায়</h1>
+    <div class="header-buttons">
+      <button id="menu-toggle" aria-label="Toggle navigation menu">
+        <span class="icon"></span>
+      </button>
+      <button id="theme-toggle" aria-label="Toggle dark/light mode">
+        ☀️
+      </button>
+    </div>
+  </header>
+  
+  <div class="overlay"></div>
+  
+  <nav id="sidebar">
+    <ul>
+      <li><a href="index.html" class="active">হোম</a></li>
+      <li><a href="pages/lesson1.html">পাঠ ১</a></li>
+      <li><a href="pages/lesson2.html">পাঠ ২</a></li>
+      <li><a href="pages/lesson3.html">পাঠ ৩</a></li>
+    </ul>
+  </nav>
+  <main id="content">
+    <section class="hero">
+      <h2>স্বাগতম!</h2>
+      <p class="lead">এখানে আপনি Python প্রোগ্রামিং ভাষা সম্পর্কে বাংলায় শিখতে পারবেন।</p>
+      
+      <div class="search-wrapper" style="position: relative; width: 100%;">
+        <div class="search-container">
+          <input type="text" id="search-input" class="search-box" placeholder="লেসন খুঁজুন..." aria-label="লেসন খুঁজুন">
+          <span class="search-icon">🔍</span>
+          
+          <div id="search-results" class="search-results">
+            <!-- Search results will be displayed here -->
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="lessons">
+      <h3>পাঠ সমূহ</h3>
+      <div class="progress-tracking">
+        <div class="progress-container">
+          <div class="progress-label">আপনার অগ্রগতি:</div>
+          <div class="progress-wrapper">
+            <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
+          </div>
+          <div id="progress-percentage" class="progress-percentage">0%</div>
+        </div>
+      </div>
+      <p>শুরু করতে নিচের পাঠগুলিতে ক্লিক করুন:</p>
+      <div class="lesson-grid">
+        <a href="pages/lesson1.html" class="lesson-card" id="lesson1">
+          <h4>পাঠ ১</h4>
+          <p>Python পরিচিতি</p>
+        </a>
+        <a href="pages/lesson2.html" class="lesson-card" id="lesson2">
+          <h4>পাঠ ২</h4>
+          <p>ভেরিয়েবল এবং ডেটা টাইপ</p>
+        </a>
+        <a href="pages/lesson3.html" class="lesson-card" id="lesson3">
+          <h4>পাঠ ৩</h4>
+          <p>কন্ট্রোল স্ট্রাকচার</p>
+        </a>
+      </div>
+    </section>
+  </main>
+  
+  <div id="network-status" class="network-status">
+    <span class="status-icon">🔄</span>
+    <span class="status-text">সংযোগ চেক করা হচ্ছে...</span>
+  </div>
+  
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+    <span>↑</span>
+  </button>
+  
+  <footer>
+    <p>© 2023 Python শিখি বাংলায়</p>
+  </footer>
+  <script src="js/script.js"></script>
+  <!-- Prism.js for syntax highlighting -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-SkmBfuA2hqjzEVpmnMt/LINrjop3GKWqsuLSSB3e7iBmYK7JuWw4ldmmxwD9mdm2IRTTi0OxSAfEGvgEi0i2Kw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>

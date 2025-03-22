@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Python শিখি বাংলায় - আপনি বর্তমানে অফলাইন আছেন।">
+  <meta name="keywords" content="Python, বাংলা, অফলাইন, প্রোগ্রামিং">
+  <meta name="author" content="Python শিখি বাংলায়">
+  <title>অফলাইন - Python শিখি বাংলায়</title>
+  <script>
+    // Apply the saved theme immediately to prevent flash
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .offline-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      margin: 2rem auto;
+      max-width: 800px;
+      border-radius: 10px;
+      background-color: var(--card-bg);
+      box-shadow: 0 4px 6px var(--shadow-color);
+    }
+    
+    .offline-icon {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      color: var(--title-color);
+    }
+    
+    .offline-message {
+      margin-bottom: 2rem;
+    }
+    
+    .cached-links {
+      width: 100%;
+      max-width: 500px;
+      margin: 1rem 0;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: var(--bg-secondary);
+    }
+    
+    .cached-links h3 {
+      margin-bottom: 1rem;
+      color: var(--title-color);
+    }
+    
+    .cached-links ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .cached-links li {
+      margin-bottom: 0.75rem;
+    }
+    
+    .cached-links a {
+      display: block;
+      padding: 0.75rem;
+      color: var(--link-color);
+      background-color: var(--bg-tertiary);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    
+    .cached-links a:hover {
+      background-color: var(--button-hover);
+      color: var(--text-on-button);
+      transform: translateY(-2px);
+    }
+    
+    @media (max-width: 767px) {
+      .offline-container {
+        padding: 1.5rem;
+        margin: 1rem;
+      }
+      
+      .offline-icon {
+        font-size: 4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Python শিখি বাংলায়</h1>
+    <div class="header-buttons">
+      <button id="theme-toggle" aria-label="Toggle dark/light mode">
+        ☀️
+      </button>
+    </div>
+  </header>
+  
+  <main id="content">
+    <div class="offline-container">
+      <div class="offline-icon">📶</div>
+      <h2>আপনি বর্তমানে অফলাইন!</h2>
+      
+      <div class="offline-message">
+        <p>ইন্টারনেট সংযোগ নেই বা সার্ভারের সাথে যোগাযোগ করা যাচ্ছে না। আপনি যে পৃষ্ঠাটি অ্যাক্সেস করার চেষ্টা করছেন সেটি অফলাইন অবস্থায় উপলব্ধ নয়।</p>
+        <p>নিচের ক্যাশ করা পৃষ্ঠাগুলি অফলাইনে দেখতে পারেন:</p>
+      </div>
+      
+      <div class="cached-links">
+        <h3>উপলব্ধ পৃষ্ঠাসমূহ</h3>
+        <ul>
+          <li><a href="../index.html">হোম</a></li>
+          <li><a href="lesson1.html">পাঠ ১: পাইথন পরিচিতি</a></li>
+          <li><a href="lesson2.html">পাঠ ২: ভেরিয়েবল এবং ডেটা টাইপ</a></li>
+          <li><a href="lesson3.html">পাঠ ৩: কন্ট্রোল স্ট্রাকচার</a></li>
+        </ul>
+      </div>
+      
+      <p>ইন্টারনেট সংযোগ পুনরায় চালু হলে পুনরায় চেষ্টা করুন।</p>
+    </div>
+  </main>
+  
+  <footer>
+    <p>© 2023 Python শিখি বাংলায়</p>
+  </footer>
+  
+  <div id="network-status" class="network-status">
+    <span class="status-icon">🔄</span>
+    <span class="status-text">সংযোগ চেক করা হচ্ছে...</span>
+  </div>
+  
+  <script src="../js/script.js"></script>
+</body>
+</html> 

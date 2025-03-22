@@ -1,10 +1,10 @@
-# Python শিখি বাংলায় (Learn Python in Bengali)
+# Python শিখি বাংলায় (Learn Python in Bangla)
 
-An interactive website for learning Python programming in Bengali language.
+An interactive website for learning Python programming in Bangla language.
 
 ## Features
 
-- Easy-to-understand lessons in Bengali
+- Easy-to-understand lessons in Bangla
 - Dark/light theme support
 - Search functionality to find content quickly
 - Progress tracking for completed lessons
@@ -39,6 +39,15 @@ git clone https://github.com/AbdurRafay2004/Python_sikhi_banglay.git
 cd Python_sikhi_banglay
 ```
 
-## License
+## Licensing
 
-This project is open source under the MIT License. 
+This project is available under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0). This means you are free to:
+
+- Share — copy and redistribute the material in any medium or format
+- Adapt — remix, transform, and build upon the material
+
+Under the following terms:
+- Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made.
+- NonCommercial — You may not use the material for commercial purposes.
+
+For more information, see the [full license text](https://creativecommons.org/licenses/by-nc/4.0/legalcode). 

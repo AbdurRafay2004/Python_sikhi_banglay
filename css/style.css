@@ -56,7 +56,7 @@
 [data-theme='dark'] code[class*="language-"],
 [data-theme='dark'] pre[class*="language-"] {
   color: #e2e8f0;
-  text-shadow: none;
+  /* text-shadow: none; */
 }
 
 [data-theme='dark'] .token.comment,
@@ -125,9 +125,19 @@
 .token.url,
 .language-css .token.string,
 .style .token.string {
-  color: #2b6cb0;
+  color: #0056b3;
   font-weight: bold;
   background: transparent;
+  /* text-shadow: none; */
+}
+
+/* Make comparison operators more visible in light theme */
+.token.operator.comparison-operator {
+  color: #e83e8c;
+  font-weight: bold;
+  background: rgba(232, 62, 140, 0.1);
+  padding: 0 2px;
+  border-radius: 2px;
 }
 
 /* Remove the data-value selectors since they don't work with Prism.js */
@@ -522,12 +532,14 @@ code {
 /* Progress Tracking */
 .progress-tracking {
   margin: 1.5rem 0;
+  width: 100%;
 }
 
 .progress-container {
   display: flex;
   align-items: center;
   margin-bottom: 0.5rem;
+  width: 100%;
 }
 
 .progress-label {
@@ -679,26 +691,36 @@ code {
   }
   
   /* Adjust progress tracking on mobile */
+  .progress-tracking {
+    width: 90%;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
   .progress-container {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
   }
   
   .progress-label {
-    width: 100%;
+    width: auto;
     margin-bottom: 0.5rem;
-    margin-right: 0;
+    margin-right: 0.5rem;
   }
   
   .progress-wrapper {
     width: 100%;
-    margin-right: 0;
+    margin-right: 0.5rem;
     margin-bottom: 0.5rem;
+    flex: 1;
+    min-width: 150px;
   }
   
   .progress-percentage {
-    width: 100%;
-    text-align: left;
+    width: auto;
+    text-align: right;
   }
 }
 
@@ -922,4 +944,23 @@ code {
   .header-buttons {
     gap: 0.1rem;
   }
+}
+
+/* Dark mode overrides for Prism.js */
+[data-theme='dark'] .token.operator,
+[data-theme='dark'] .token.entity,
+[data-theme='dark'] .token.url,
+.language-css[data-theme='dark'] .token.string,
+.style[data-theme='dark'] .token.string {
+  color: #81e6d9;
+  font-weight: bold;
+  background: transparent;
+}
+
+[data-theme='dark'] .token.operator.comparison-operator {
+  color: #ed64a6;
+  font-weight: bold;
+  background: rgba(237, 100, 166, 0.15);
+  padding: 0 2px;
+  border-radius: 2px;
 }

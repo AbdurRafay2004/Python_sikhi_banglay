@@ -63,15 +63,88 @@
   opacity: 0.7;
 }
 
-/* Different widths for different elements */
-.fonts-loading h1::before { width: 90%; }
-.fonts-loading h2::before { width: 85%; }
-.fonts-loading h3::before { width: 80%; }
-.fonts-loading h4::before { width: 75%; }
-.fonts-loading p::before { width: 100%; }
-.fonts-loading a::before { width: auto; min-width: 60px; }
-.fonts-loading li::before { width: 95%; }
-.fonts-loading button::before { width: 100%; }
+/* Improved placeholder sizes and shapes to match Bengali text */
+.fonts-loading h1::before { 
+  width: 90%; 
+  height: 1.2em;
+  border-radius: 6px;
+}
+
+.fonts-loading h2::before { 
+  width: 85%; 
+  height: 1.1em;
+  border-radius: 5px;
+}
+
+.fonts-loading h3::before { 
+  width: 80%; 
+  height: 1em;
+  border-radius: 5px;
+}
+
+.fonts-loading h4::before { 
+  width: 75%; 
+  height: 0.9em;
+  border-radius: 4px;
+}
+
+.fonts-loading p::before { 
+  width: 100%; 
+  height: 0.8em;
+  margin-bottom: 0.7em;
+}
+
+.fonts-loading a::before { 
+  width: auto; 
+  min-width: 60px; 
+  height: 0.8em;
+  border-radius: 3px;
+}
+
+.fonts-loading li::before { 
+  width: 95%; 
+  height: 0.8em;
+  border-radius: 3px;
+}
+
+.fonts-loading button::before { 
+  width: 100%; 
+  height: 0.9em;
+  border-radius: 4px;
+}
+
+/* Custom placeholder for the search box */
+.fonts-loading .search-box::before {
+  height: 30px;
+  border-radius: 20px;
+}
+
+/* Specific customizations for Bengali heading */
+.fonts-loading main h2::before {
+  height: 1.4em;
+  width: 20%;
+  margin: 0 auto;
+}
+
+/* Custom placeholder for progress bar */
+.fonts-loading .progress-bar::before {
+  height: 8px;
+  border-radius: 4px;
+}
+
+/* Custom multi-line paragraphs */
+.fonts-loading main > p::before {
+  height: calc(100% - 20px);
+  margin-top: 5px;
+}
+
+/* For lesson cards */
+.fonts-loading .lesson-card::before {
+  height: 90%;
+  width: 95%;
+  border-radius: 10px;
+  margin: 5px auto;
+}
 
 /* This will be applied when fonts are loaded */
 .fonts-loaded h1,

@@ -35,9 +35,7 @@
 .fonts-loading a,
 .fonts-loading li,
 .fonts-loading span,
-.fonts-loading button,
-.fonts-loading input:not(.search-box),
-.fonts-loading textarea {
+.fonts-loading button {
   position: relative;
   color: transparent !important;
   overflow: hidden;
@@ -51,9 +49,7 @@
 .fonts-loading p::before,
 .fonts-loading a::before,
 .fonts-loading li::before,
-.fonts-loading button::before,
-.fonts-loading input:not(.search-box)::before,
-.fonts-loading textarea::before {
+.fonts-loading button::before {
   content: "";
   position: absolute;
   top: 0;
@@ -159,9 +155,7 @@
 .fonts-loaded a,
 .fonts-loaded li,
 .fonts-loaded span,
-.fonts-loaded button,
-.fonts-loaded input:not(.search-box),
-.fonts-loaded textarea {
+.fonts-loaded button {
   animation: textReveal 0.5s ease-out forwards;
   color: var(--text-color); /* Ensure text color is restored */
 }
@@ -174,9 +168,7 @@
 .fonts-loaded p::before,
 .fonts-loaded a::before,
 .fonts-loaded li::before,
-.fonts-loaded button::before,
-.fonts-loaded input:not(.search-box)::before,
-.fonts-loaded textarea::before {
+.fonts-loaded button::before {
   display: none;
 }
 
@@ -224,66 +216,4 @@ html:not(.fonts-loading) .font-loading-indicator {
   visibility: hidden !important;
   pointer-events: none !important;
   height: 0 !important;
-}
-
-/* Explicitly exclude code, pre, progress-bar from font loading animation */
-.fonts-loading pre,
-.fonts-loading code,
-.fonts-loading .search-box,
-.fonts-loading .progress-bar {
-  animation: none !important;
-  opacity: 1 !important;
-  color: inherit !important;
-}
-
-.fonts-loading pre::before,
-.fonts-loading code::before,
-.fonts-loading .search-box::before,
-.fonts-loading .progress-bar::before {
-  display: none !important;
-}
-
-/* INCLUDE code blocks in lessons in the loading animation */
-.fonts-loading .lesson-content pre,
-.fonts-loading .lesson-content code,
-.fonts-loading .content-block pre,
-.fonts-loading .content-block code {
-  position: relative;
-  color: transparent !important;
-  overflow: hidden;
-  animation: none;
-}
-
-.fonts-loading .lesson-content pre::before,
-.fonts-loading .lesson-content code::before,
-.fonts-loading .content-block pre::before,
-.fonts-loading .content-block code::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, var(--bg-tertiary) 8%, var(--bg-secondary) 18%, var(--bg-tertiary) 33%);
-  background-size: 800px 100%;
-  animation: shimmer 2s infinite linear;
-  border-radius: 4px;
-  opacity: 0.7;
-  display: block !important;
-}
-
-/* Remove placeholders when fonts are loaded */
-.fonts-loaded .lesson-content pre::before,
-.fonts-loaded .lesson-content code::before,
-.fonts-loaded .content-block pre::before,
-.fonts-loaded .content-block code::before {
-  display: none !important;
-}
-
-.fonts-loaded .lesson-content pre,
-.fonts-loaded .lesson-content code,
-.fonts-loaded .content-block pre,
-.fonts-loaded .content-block code {
-  animation: textReveal 0.5s ease-out forwards;
-  color: inherit;
 } 

@@ -1,0 +1,83 @@
+/* Font Loading Animation Styles */
+@keyframes textReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* This will be applied during font loading */
+.fonts-loading {
+  /* Font stack during loading - system UI fonts first */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+
+.fonts-loading h1,
+.fonts-loading h2,
+.fonts-loading h3,
+.fonts-loading h4,
+.fonts-loading p,
+.fonts-loading a,
+.fonts-loading li,
+.fonts-loading span,
+.fonts-loading button {
+  opacity: 0;
+}
+
+/* This will be applied when fonts are loaded */
+.fonts-loaded h1,
+.fonts-loaded h2,
+.fonts-loaded h3,
+.fonts-loaded h4,
+.fonts-loaded p,
+.fonts-loaded a,
+.fonts-loaded li,
+.fonts-loaded span,
+.fonts-loaded button {
+  animation: textReveal 0.5s ease-out forwards;
+}
+
+/* Staggered animation for different text elements */
+.fonts-loaded h1 { animation-delay: 0s; }
+.fonts-loaded h2 { animation-delay: 0.05s; }
+.fonts-loaded h3 { animation-delay: 0.1s; }
+.fonts-loaded h4 { animation-delay: 0.15s; }
+.fonts-loaded p { animation-delay: 0.2s; }
+.fonts-loaded a { animation-delay: 0.25s; }
+.fonts-loaded li { animation-delay: 0.3s; }
+.fonts-loaded span { animation-delay: 0.35s; }
+.fonts-loaded button { animation-delay: 0.4s; }
+
+/* Tiny loading indicator that shows during font loading */
+.font-loading-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--button-bg) 0%, var(--button-hover) 100%);
+  z-index: 2000;
+  transform-origin: left;
+  animation: loadingProgress 1.5s infinite ease-in-out;
+}
+
+@keyframes loadingProgress {
+  0% {
+    transform: scaleX(0);
+  }
+  50% {
+    transform: scaleX(0.7);
+  }
+  100% {
+    transform: scaleX(0);
+  }
+}
+
+/* Hide loading indicator when fonts are loaded */
+.fonts-loaded .font-loading-indicator {
+  display: none;
+} 

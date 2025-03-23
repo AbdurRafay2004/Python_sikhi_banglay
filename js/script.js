@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
           menuToggle.classList.remove('active');
           sidebar.classList.remove('active');
           overlay.classList.remove('active');
-          body.classList.remove('menu-open');
+          body.classList.remove('sidebar-open');
         }
       });
     });
@@ -483,11 +483,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Run after the page loads and after Prism.js highlights code
-    document.addEventListener('DOMContentLoaded', function() {
-      // Call directly without timeout for immediate execution  
-      enhanceComparisonOperators();
-    });
+    // Call enhanceComparisonOperators directly instead of adding another DOMContentLoaded listener
+    enhanceComparisonOperators();
 
     // Add copy code functionality
     addCopyCodeButtons();

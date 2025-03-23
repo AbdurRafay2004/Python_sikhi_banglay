@@ -8,6 +8,19 @@ document.addEventListener('DOMContentLoaded', function() {
   loadingIndicator.className = 'font-loading-indicator';
   document.body.appendChild(loadingIndicator);
   
+  // Function to clean up when fonts are loaded
+  function finishFontLoading() {
+    document.documentElement.classList.remove('fonts-loading');
+    document.documentElement.classList.add('fonts-loaded');
+    
+    // Explicitly remove the loading indicator from the DOM
+    if (loadingIndicator && loadingIndicator.parentNode) {
+      loadingIndicator.parentNode.removeChild(loadingIndicator);
+    }
+    
+    console.log('All fonts have been loaded!');
+  }
+  
   // Use the CSS Font Loading API if available
   if ('fonts' in document) {
     // Define the font we want to load
@@ -26,26 +39,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // When fonts are loaded, change the class
-        setTimeout(() => {
-          document.documentElement.classList.remove('fonts-loading');
-          document.documentElement.classList.add('fonts-loaded');
-          
-          // Log success
-          console.log('All fonts have been loaded!');
-        }, 50); // Small delay to ensure fonts are applied
+        setTimeout(finishFontLoading, 50); // Small delay to ensure fonts are applied
       })
       .catch(error => {
         console.error('Error loading fonts:', error);
         // On error, remove loading class to show content with fallback font
         document.documentElement.classList.remove('fonts-loading');
         document.documentElement.classList.add('fonts-error');
+        
+        // Also remove the loading indicator
+        if (loadingIndicator && loadingIndicator.parentNode) {
+          loadingIndicator.parentNode.removeChild(loadingIndicator);
+        }
       });
   } else {
     // For browsers that don't support the Font Loading API
     // Use a timeout as a fallback method
-    setTimeout(() => {
-      document.documentElement.classList.remove('fonts-loading');
-      document.documentElement.classList.add('fonts-loaded');
-    }, 2000); // Wait 2 seconds and assume fonts loaded
+    setTimeout(finishFontLoading, 2000); // Wait 2 seconds and assume fonts loaded
   }
 }); 

@@ -78,6 +78,11 @@
 }
 
 /* Hide loading indicator when fonts are loaded */
-.fonts-loaded .font-loading-indicator {
-  display: none;
+.fonts-loaded .font-loading-indicator,
+html:not(.fonts-loading) .font-loading-indicator {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  height: 0 !important;
 } 
